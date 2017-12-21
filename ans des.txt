@@ -1,0 +1,57 @@
+95.70.DataContractSerializer vs NetDataContractSerializer 
+
+Here is the DataContractSerializer version of the Person data
+
+<Customer xmlns="http://www.contoso.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <FirstName>Zighetti</FirstName>
+  <ID>101</ID>
+  <LastName>Barbara</LastName>
+</Customer>
+
+And here is the version from the NetDataContractSerializer
+
+<Customer z:Id="1" z:Type="NetDCS.Person" z:Assembly="NetDCS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" xmlns="http://www.contoso.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/">
+  <FirstName z:Id="2">Zighetti</FirstName>
+  <ID>101</ID>
+  <LastName z:Id="3">Barbara</LastName>
+</Customer>
+
+As you can see the NetDataContractSerializer included information about the type and the assembly which can be used on the client side
+
+The .NET Framework ships with 
+System.Runtime.Serialization.Json.DataContractJsonSerializer and 
+System.Web.Script.Serialization.JavaScriptSerializer, both of which de/serialize JSON.
+
+
+The DataContractJsonSerializer is intended for use with WCF client applications where the serialized types are typically POCO classes with the DataContract attribute applied to them. No DataContract, no serialization. The mapping mechanism of WCF makes the sending and receiving very simple, but only if your platform is homogeneous. If you start mixing in different toolsets, your program might go sideways.
+
+The JavaScriptSerializer can serialize any type, including anonymous types (one way), and does so in a more conformant way. You lose the "automagic" of WCF, but you gain more integration options.
+
+hence D
+
+100:page 75
+tokenSource.Cancel();
+the C answer is not valid, as IsCancellationRequested property is ReadOnly.
+IsCancellationRequested	
+Gets whether cancellation has been requested for this CancellationTokenSource.
+Token	
+Gets the CancellationToken associated with this CancellationTokenSource.
+
+
+107:p:82
+
+down vote
+accepted
+With the WebClient class:
+
+using System.Net;
+//...
+WebClient Client = new WebClient ();
+Client.DownloadFile("http://i.stackoverflow.com/Content/Img/stackoverflow-logo-250.png", @"C:\folder\stackoverflowlogo.png");
+
+109:Add the AssemblyDelaySignAttribute attribute to the assembly.
+
+
+
+
+

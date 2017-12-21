@@ -1,1 +1,14 @@
 97: no idea page-71
+103:77 no idea 
+106
+111:wrong answer correct is optiond D
+112:c is correct
+122:d is correct 
+Gets the value of the computed hash code.
+HashAlgorithm.Hash Property
+https://stackoverflow.com/questions/20048328/c-sharp-hashing-multiple-byte-array-blocks/20048684#20048684
+https://blogs.msdn.microsoft.com/shawnfa/2004/02/20/using-the-hashing-transforms-or-how-do-i-compute-a-hash-block-by-block/
+https://msdn.microsoft.com/en-us/library/system.security.cryptography.hashalgorithm.hash(v=vs.110)
+
+
+
