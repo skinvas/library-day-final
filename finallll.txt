@@ -1,0 +1,193 @@
+7.
+If you want to check if it's an instance of a generic type:
+
+return list.GetType().IsGenericType;
+If you want to check if it's a generic List<T>:
+
+return list.GetType().GetGenericTypeDefinition() == typeof(List<>);
+
+but 
+if(customers is List<Customer>)
+returns true 
+
+8.
+C#
+#define TRACE	Enables tracing
+#undef TRACE	Disables tracing
+#define DEBUG	Enables debugging
+#undef DEBUG	Disables debugging
+
+#if DEBUG: The code in here won't even reach the IL on release.
+[Conditional("DEBUG")]: This code will reach the IL, however calls to the method will be omitted unless DEBUG is set when the caller is compiled.
+
+9.https://gist.github.com/qwertie/3867055
+creating a dictionary with weak references in c#
+
+10.The basic rules for data ordering include:
+
+If a data contract type is a part of an inheritance hierarchy, data members of its base types are always first in the order.
+
+Next in order are the current type’s data members that do not have the Order property of the DataMemberAttribute attribute set, in alphabetical order.
+
+Next are any data members that have the Order property of the DataMemberAttribute attribute set. These are ordered by the value of the Order property first and then alphabetically if there is more than one member of a certain Order value. Order values may be skipped.
+
+[DataContract]
+public class BaseType
+{
+
+    [DataMember]
+    public string zebra;
+}
+[DataContract]
+public class DerivedType : BaseType
+{
+    [DataMember(Order = 0)]
+    public string bird;
+    [DataMember(Order = 1)]
+    public string parrot;
+    [DataMember]
+    public string dog;
+    [DataMember(Order = 3)]
+    public string antelope;
+    [DataMember]
+    public string cat;
+    [DataMember(Order = 1)]
+    public string albatross;
+}
+
+<DerivedType>  
+    <!-- Zebra is a base data member, and appears first. -->  
+    <zebra/>   
+
+    <!-- Cat has no Order, appears alphabetically first. -->  
+    <cat/>  
+
+   <!-- Dog has no Order, appears alphabetically last. -->  
+    <dog/>   
+
+    <!-- Bird is the member with the smallest Order value -->  
+    <bird/>  
+
+    <!-- Albatross has the next Order value, alphabetically first. -->  
+    <albatross/>  
+
+    <!-- Parrot, with the next Order value, alphabetically last. -->  
+     <parrot/>  
+
+    <!-- Antelope is the member with the highest Order value. Note that   
+    Order=2 is skipped -->  
+     <antelope/>   
+</DerivedType>
+
+11.
+The Windows Software Development Kit (SDK) provides several ways to sign an assembly with a strong name:
+* (A) Using assembly attributes to insert the strong name information in your code. You can use either the
+AssemblyKeyFileAttribute or the AssemblyKeyNameAttribute, depending on where the key file to be used is
+located.
+* Using the Assembly Linker (Al.exe) provided by the Windows SDK.
+* Using compiler options such /keyfile or /delaysign in C# and Visual Basic, or the /KEYFILE or /DELAYSIGN
+linker option in C++. (For information on delay signing, see Delay Signing an Assembly.)
+
+12.
+* WebRequest.Create Method (Uri)
+Initializes a new WebRequest instance for the specified URI scheme.* Example:
+1. To request data from a host server
+Create a WebRequest instance by calling Create with the URI of the resource.
+C#
+WebRequest request = WebRequest.Create(“http://www.contoso.com/”);
+2. Set any property values that you need in the WebRequest. For example, to enable authentication, set the
+Credentials property to an instance of the NetworkCredential class.
+C#
+request.Credentials = CredentialCache.DefaultCredentials;
+3. To send the request to the server, call GetResponse . The actual type of the returned WebResponse object
+is determined by the scheme of the requested URI.
+C#
+WebResponse response = request.GetResponse();
+4. To get the stream containing response data sent by the server, use the GetResponseStream method of the
+WebResponse.
+C#
+Stream dataStream = response.GetResponseStream ();
+
+13.
+You are developing an application by using C#. The application will write events to an event log.
+You plan to deploy the application to a server.
+You create an event source named AppSource and a custom log named AppLog on the server.
+You need to write events to the custom log.
+Which code segment should you use?
+
+https://www.briefmenow.org/microsoft/which-code-segment-should-you-use-1257/
+ans
+Source should be AppSource:
+* New-EventLog
+Creates a new event log and a new event source on a local or remote computer.
+Parameters include:
+-Source<String[]>
+Specifies the names of the event log sources, such as application programs that write to the event log. This
+parameter is required.
+
+ Applications and services should write to the Application log or a custom log. Device drivers should write to the System log
+
+
+
+14.https://www.briefmenow.org/microsoft/which-code-segment-should-you-insert-at-line-23-4/
+
+15.hash algorithm 
+https://www.briefmenow.org/microsoft/which-code-segment-should-you-insert-at-line-05-69/
+
+
+16.
+#if (DEBUG) VS System.Diagnostics.Debugger.IsAttached
+
+#if DEBUG ensures the code is not included in the assembly at all in release builds. Also, code included by #if DEBUG runs all the time in a debug build - not just when running under a debugger.
+
+Debugger.IsAttached means the code is included whether debug or release build. And a debugger can be attached to release builds to.
+
+It's common to use both together. #if DEBUG is usually used for things like logging, or to reduce exception handling in internal test builds. Debugger.IsAttached tends to just be used to decide whether to swallow exceptions or show them to a programmer - more of a programmer aid than anything else.
+
+#if (DEBUG) is a preprocessor directive that allows you to conditionally compile code.
+
+System.Diagnostics.Debugger.IsAttached provides a runtime value that indicates whether a debugger is attached to the process.
+
+
+17.
+
+SHA isn’t encryption, it’s a one-way hash function. AES (Advanced_Encryption_Standard) is a symmetric encryption standard.
+
+You plan to store passwords in a Windows Azure SQL Database database.
+
+You need to ensure that the passwords are stored in the database by using a hash
+algorithm,
+Which cryptographic algorithm should you use?
+
+
+
+18.
+
+Create a TaskCompletionSource<T> object.
+
+Call the component by using the TaskFactory.FromAsync() method.
+
+IAsyncResult
+
+19.
+Add the AssemblyDelaySignAttribute attribute to the assembly. 
+
+When this attribute is used on an assembly, space is reserved for the signature which is later filled by a signing tool such as the Sn.exe utility. Delayed signing is used when the author of the assembly does not have access to the private key that will be used to generate the signature, as in [assembly:AssemblyDelaySignAttribute(true)].
+
+20:
+for asynchronous 
+https://www.briefmenow.org/microsoft/which-two-actions-should-you-perform-1396/
+
+21:
+
+Return ser.Deserialize<Name>(json);
+https://www.briefmenow.org/microsoft/which-code-segment-should-you-insert-at-line-10-15/
+
+22:
+var dataContainer = obj as IDataContainer; 
+
+Explanation:
+As – The as operator is like a cast operation. However, if the conversion isn’t possible, as returns null instead of
+raising an exception.
+http://msdn.microsoft.com/en-us/library/cscsdfbt(v=vs.110).aspx
+
